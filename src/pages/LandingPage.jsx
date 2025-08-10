@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Hyperspeed from "../components/Hyperspeed";
+import Hyperspeed from "../components/HyperSpeed";
 import { useMediaQuery } from "react-responsive";
 
 const StyledLinkButton = styled(Link)`
