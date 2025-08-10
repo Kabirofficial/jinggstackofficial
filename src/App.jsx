@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 
 import LandingPage from './pages/LandingPage';
-import HomePage from './pages/Homepage';
+import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
