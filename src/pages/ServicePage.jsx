@@ -1,7 +1,24 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 
 const ServiceCard = ({ title, tag, description, features, price, pricePeriod }) => {
+  // Hook to navigate programmatically
+  const navigate = useNavigate();
+  // Hook to check for mobile screen size
+  const isMobile = useMediaQuery({ query: `(max-width: 768px)` });
+
+  const handleGetStartedClick = () => {
+    // If it's a mobile device, navigate in the same tab.
+    if (isMobile) {
+      navigate('/contact');
+    } else {
+      // On desktop, open the contact page in a new tab.
+      window.open('/contact', '_blank');
+    }
+  };
+
   return (
     <CardWrapper>
       <div className="card">
@@ -14,7 +31,6 @@ const ServiceCard = ({ title, tag, description, features, price, pricePeriod }) 
 
         <div className="card-body">
           <div className="card-description">{description}</div>
-
           <div className="feature-grid">
             {features.map((feature, index) => (
               <div className="feature-item" key={index}>
@@ -23,14 +39,15 @@ const ServiceCard = ({ title, tag, description, features, price, pricePeriod }) 
               </div>
             ))}
           </div>
-
           <div className="card-actions">
             <div className="price">
               <span className="price-currency"></span>
               {price}
               <span className="price-period">/{pricePeriod}</span>
             </div>
-            <button className="card-button" onClick={() => window.open("/contact")}>Get Started</button>
+            <button className="card-button" onClick={handleGetStartedClick}>
+              Get Started
+            </button>
           </div>
         </div>
         
@@ -46,7 +63,6 @@ const ServiceCard = ({ title, tag, description, features, price, pricePeriod }) 
 };
 
 const ServicesPage = () => {
-
   const servicesData = [
     {
       title: "Full Stack Development",
@@ -127,6 +143,7 @@ const ServicesPage = () => {
   );
 };
 
+// ... (The CardWrapper styled-component code remains the same)
 const CardWrapper = styled.div`
   .card {
     /* --- THEME COLORS --- */
