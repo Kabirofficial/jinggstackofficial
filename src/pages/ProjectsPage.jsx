@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 import netfliximg from "../assets/webimg/netflix.jpeg";
@@ -11,53 +10,74 @@ import primevideoimg from "../assets/webimg/primevideo.jpeg";
 import jsprojectsimg from "../assets/webimg/jsminiproject.png";
 import futuristicportfolioimg from "../assets/webimg/futuristicportfolio.png";
 import yumyardImg from "../assets/webimg/YumYard.png";
+import civiclensImg from "../assets/webimg/civiclens.png";
+import resumescreenerImg from "../assets/webimg/airesume.png";
+import jinggdeskImg from "../assets/webimg/jinggdesk.png";
+import snfilmzImg from "../assets/webimg/snfilmz.png";
+import n8nautomationImg from "../assets/webimg/n8n.png";
+import jinggstackImg from "../assets/webimg/RAG.png";
 
 const ProjectCard = ({ project }) => {
   return (
-    <CardWrapper imageUrl={project.imageUrl}>
-      <div className="parent">
-        <div className="card">
-          <div className="hover-prompt">
-            <span className="prompt-text">Hover Me</span>
-          </div>
-          <div className="content">
-            <span className="title">{project.title}</span>
-            <span className="text">{project.description}</span>
-          </div>
-          <div className="bottom">
-            <div className="social-buttons-container">
-              {project.repoUrl && (
-                <a
-                  href={project.repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-button"
-                >
-                  <FaGithub className="svg" />
-                </a>
-              )}
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-button"
-                >
-                  <FaExternalLinkAlt className="svg" />
-                </a>
-              )}
-            </div>
-            <div className="view-more">
-              {project.technologies.slice(0, 2).map((tech) => (
-                <span key={tech} className="tech-tag">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
+    <div className="relative group w-80 h-[420px] rounded-3xl overflow-hidden shadow-xl hover:shadow-[0_0_40px_rgba(168,85,247,0.4)] transition-all duration-500 transform hover:-translate-y-2">
+      <div
+        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+        style={{ backgroundImage: `url(${project.imageUrl})` }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-[#111827]/80 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-95" />
+
+      <div className="absolute inset-0 p-6 flex flex-col justify-end">
+        <div className="absolute top-4 right-4 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100">
+          <span className="bg-purple-600/90 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">
+            Featured
+          </span>
+        </div>
+
+        <h3 className="text-2xl font-bold text-white mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+          {project.title}
+        </h3>
+
+        <p className="text-gray-300 text-sm mb-4 line-clamp-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-2 mb-6 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+          {project.technologies.slice(0, 3).map((tech) => (
+            <span
+              key={tech}
+              className="text-[10px] font-bold uppercase tracking-wider text-purple-300 bg-purple-900/40 px-2 py-1 rounded border border-purple-500/30"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-4 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+          {project.repoUrl && (
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-purple-400 hover:text-purple-300 hover:scale-110 transition-all duration-300"
+              title="View Code"
+            >
+              <FaGithub size={18} />
+            </a>
+          )}
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-600/80 hover:bg-purple-600 text-white shadow-lg hover:shadow-purple-500/50 hover:scale-110 transition-all duration-300"
+              title="Live Demo"
+            >
+              <FaExternalLinkAlt size={16} />
+            </a>
+          )}
         </div>
       </div>
-    </CardWrapper>
+    </div>
   );
 };
 
@@ -65,7 +85,7 @@ const ProjectsPage = () => {
   const projectsData = [
     {
       id: 1,
-      title: "Kabir's Futuristic Portfolio",
+      title: "Futuristic Portfolio",
       description:
         "A cyberpunk-themed portfolio website with 3D elements, animations, and responsive design.",
       technologies: ["Three.js", "SCSS", "JS"],
@@ -145,29 +165,94 @@ const ProjectsPage = () => {
       imageUrl: yumyardImg,
       repoUrl: "https://github.com/your-username/YumYard",
     },
+    {
+      id: 10,
+      title: "CivicLens",
+      description:
+        "An AI-powered civic issue detection and reporting platform that identifies problems like potholes and garbage using computer vision, GPS tagging, and smart duplicate filtering.",
+      technologies: [
+        "Python",
+        "FastAPI",
+        "YOLOv8",
+        "MongoDB",
+        "React",
+        "Tailwind",
+      ],
+      imageUrl: civiclensImg,
+      repoUrl: "https://github.com/Kabirofficial/CivicLens",
+    },
+
+    {
+      id: 11,
+      title: "RAG-Based Resume Screener",
+      description:
+        "An intelligent resume screening system using Retrieval-Augmented Generation (RAG) to match resumes with job descriptions and rank candidates with explainable AI reasoning.",
+      technologies: ["Python", "FastAPI", "LLMs", "FAISS", "LangChain"],
+      imageUrl: resumescreenerImg,
+      repoUrl: "https://github.com/Kabirofficial/AI-Resume-Screening",
+    },
+
+    {
+      id: 12,
+      title: "JinggStack AI Bot",
+      description:
+        "A personal AI assistant built with agent-based architecture that understands projects, codebases, and resumes to provide contextual help, planning, and code insights.",
+      technologies: ["Python", "LangGraph", "LLMs", "Vector DB", "APIs"],
+      imageUrl: jinggstackImg,
+      repoUrl: "https://github.com/Kabirofficial/jinggstack-RAG",
+    },
+
+    {
+      id: 13,
+      title: "n8n AI Automation Suite",
+      description:
+        "A collection of AI-powered automation workflows including email auto-responder, email summarizer, AI HR hiring assistant, and Meta lead extractor with scheduled reports.",
+      technologies: ["n8n", "LLMs", "APIs", "Gmail API", "Meta Ads API"],
+      imageUrl: n8nautomationImg,
+    },
+
+    {
+      id: 14,
+      title: "SnFilmz Portfolio Website",
+      description:
+        "A professional portfolio website built for a filmmaker to showcase paid reels, private shoot projects, and provide easy contact and booking access.",
+      technologies: ["React", "Tailwind CSS", "Responsive Design"],
+      imageUrl: snfilmzImg,
+      liveUrl: "https://snfilmz.vercel.app/",
+    },
+
+    {
+      id: 15,
+      title: "JinggDesk",
+      description:
+        "A full-stack task management web application with admin and user roles, JWT authentication, task workflows, dashboards, and exportable reports.",
+      technologies: ["MERN", "Tailwind CSS", "JWT", "MongoDB"],
+      imageUrl: jinggdeskImg,
+    },
   ];
 
   return (
-    <div className="bg-black text-white min-h-screen px-4 py-16 sm:px-6 lg:px-8">
+    <div className="bg-black text-white min-h-screen px-4 py-16 sm:px-6 lg:px-8 pt-32">
       <main className="max-w-7xl mx-auto">
-        <section className="text-center mb-16">
+        <section className="text-center mb-20 relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-900/10 blur-[100px] rounded-full pointing-events-none"></div>
+
           <h1
-            className="text-4xl sm:text-5xl font-extrabold"
+            className="text-4xl sm:text-6xl font-black mb-6 relative z-10"
             style={{
               color: "rgba(178, 102, 255, 0.9)",
-              textShadow:
-                "0 0 10px rgba(178, 102, 255, 0.7), 0 0 20px rgba(102, 0, 153, 0.7)",
+              textShadow: "0 0 20px rgba(102, 0, 153, 0.7)",
             }}
           >
             My Projects
           </h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-400">
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-400 relative z-10">
             A selection of my work. Each project is a journey in design and
             development.
           </p>
         </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-8 justify-items-center">
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-y-16 gap-x-8 justify-items-center pb-20">
           {projectsData.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
@@ -176,166 +261,5 @@ const ProjectsPage = () => {
     </div>
   );
 };
-
-const CardWrapper = styled.div`
-  .parent {
-    width: 320px;
-    height: 400px;
-    perspective: 1000px;
-  }
-
-  .card {
-    height: 100%;
-    border-radius: 25px;
-    background: linear-gradient(
-        135deg,
-        rgba(106, 0, 255, 0.6) 0%,
-        rgba(46, 0, 62, 0.7) 100%
-      ),
-      url(${(props) => props.imageUrl});
-    background-size: cover;
-    background-position: center;
-    transition: all 0.5s ease-in-out;
-    transform-style: preserve-3d;
-    box-shadow: rgba(106, 0, 255, 0) 40px 50px 25px -40px,
-      rgba(106, 0, 255, 0.2) 0px 25px 25px -5px;
-    position: relative;
-  }
-
-  .hover-prompt {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-    pointer-events: none;
-    opacity: 1;
-  }
-
-  .prompt-text {
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    padding: 10px 20px;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(4px);
-  }
-
-  .card:hover .hover-prompt {
-    opacity: 0;
-    transform: translate(-50%, -60%);
-  }
-
-  .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translate3d(0, 0, 26px);
-    padding: 20px;
-    width: 90%;
-    text-align: center;
-    opacity: 0;
-    transition: all 0.5s ease-in-out;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
-    border-radius: 15px;
-  }
-
-  .card:hover .content {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate3d(0, 0, 50px);
-  }
-
-  .title {
-    display: block;
-    color: #ffffff;
-    font-weight: 900;
-    font-size: 20px;
-    text-shadow: 0 0 10px rgba(178, 102, 255, 0.8);
-  }
-
-  .text {
-    display: block;
-    color: rgba(233, 213, 255, 0.8);
-    font-size: 14px;
-    margin-top: 10px;
-  }
-
-  .bottom {
-    padding: 10px 15px;
-    transform-style: preserve-3d;
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transform: translate3d(0, 0, 26px);
-  }
-
-  .social-buttons-container {
-    display: flex;
-    gap: 12px;
-    transform-style: preserve-3d;
-  }
-
-  .social-button {
-    width: 35px;
-    height: 35px;
-    background: rgba(42, 1, 94, 0.7);
-    border-radius: 50%;
-    border: none;
-    display: grid;
-    place-content: center;
-    box-shadow: rgba(106, 0, 255, 0.5) 0px 7px 5px -5px;
-    transition: all 0.3s ease;
-
-    .svg {
-      width: 18px;
-      height: 18px;
-      fill: #d8b4fe;
-      transition: all 0.3s ease;
-    }
-
-    &:hover {
-      background: #a855f7;
-      transform: scale(1.1);
-      .svg {
-        fill: white;
-      }
-    }
-  }
-
-  .view-more {
-    display: flex;
-    gap: 5px;
-  }
-
-  .tech-tag {
-    background: rgba(0, 0, 0, 0.4);
-    color: #c084fc;
-    font-weight: bold;
-    font-size: 10px;
-    padding: 4px 8px;
-    border-radius: 5px;
-  }
-
-  .parent:hover .card {
-    transform: rotate3d(0, 1, 0, 15deg) scale(1.05);
-    box-shadow: rgba(106, 0, 255, 0.3) 30px 50px 25px -40px,
-      rgba(106, 0, 255, 0.1) 0px 25px 30px 0px;
-  }
-
-  .parent:hover .card .bottom .social-button {
-    transform: translate3d(0, 0, 50px);
-    box-shadow: rgba(106, 0, 255, 0.4) -5px 20px 10px 0px;
-  }
-`;
 
 export default ProjectsPage;

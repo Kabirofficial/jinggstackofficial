@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Preloader from './components/Preloader';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import ScrollToTop from './components/ScrollToTop';
+import Preloader from "./components/Preloader";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
-import LandingPage from './pages/LandingPage';
-import HomePage from './pages/HomePage';
-import ServicesPage from './pages/ServicePage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import ProjectsPage from './pages/ProjectsPage';
+import LandingPage from "./pages/LandingPage";
+import HomePage from "./pages/HomePage";
+import ServicesPage from "./pages/ServicePage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -31,8 +32,9 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </Router>
   );
 }
