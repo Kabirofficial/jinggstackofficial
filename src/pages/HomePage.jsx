@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import aiSvg from "../assets/ai.svg";
 import cssSvfg from "../assets/css.svg";
@@ -14,243 +16,185 @@ import figmaSvg from "../assets/figma.svg";
 import restSvg from "../assets/restapi.svg";
 import sqlSvg from "../assets/sql.svg";
 import n8nSvg from "../assets/n8n-color.svg";
-import Button from "../components/Button";
+import Button from "../components/ui/Button";
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
 
 const TechIcon = ({ children, name }) => (
-  <div className="flex flex-col items-center gap-3 text-center group">
-    <div className="w-20 h-20 flex items-center justify-center bg-gray-900/50 border border-purple-500/20 rounded-2xl transition-all duration-300 group-hover:bg-purple-500/20 group-hover:border-purple-500/60 group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(168,85,247,0.3)]">
-      <div className="w-10 h-10 text-gray-400 transition-colors duration-300 group-hover:text-white filter group-hover:brightness-125">
+  <motion.div
+    variants={itemVariants}
+    whileHover={{ scale: 1.1, y: -5 }}
+    className="flex flex-col items-center gap-3 text-center group cursor-pointer"
+  >
+    <div className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center glass rounded-2xl transition-all duration-300 group-hover:border-purple-500/60 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+      <div className="w-8 h-8 sm:w-10 sm:h-10 text-gray-400 transition-all duration-300 group-hover:text-white group-hover:brightness-125">
         {children}
       </div>
     </div>
-    <span className="text-sm font-medium text-gray-500 transition-colors duration-300 group-hover:text-purple-300">
+    <span className="text-xs sm:text-sm font-medium text-gray-500 transition-colors duration-300 group-hover:text-purple-300">
       {name}
     </span>
-  </div>
+  </motion.div>
+);
+
+const StatCard = ({ value, label, icon }) => (
+  <motion.div
+    variants={itemVariants}
+    whileHover={{ scale: 1.05 }}
+    className="glass rounded-2xl p-6 text-center hover:border-purple-500/50 transition-all duration-300"
+  >
+    <div className="text-3xl sm:text-4xl font-bold text-gradient mb-2">{value}</div>
+    <div className="text-gray-400 text-sm uppercase tracking-wider">{label}</div>
+  </motion.div>
 );
 
 const HomePage = () => {
   const skills = [
-    {
-      name: "React",
-      icon: (
-        <img
-          src={reactSvg}
-          alt="React"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "Node.js",
-      icon: (
-        <img
-          src={nodeSvg}
-          alt="Node.js"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "MongoDB",
-      icon: (
-        <img
-          src={mongoSvg}
-          alt="MongoDB"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "Python",
-      icon: (
-        <img
-          src={pythonSvg}
-          alt="Python"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "HTML5",
-      icon: (
-        <img
-          src={htmlSvg}
-          alt="HTML5"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "CSS3",
-      icon: (
-        <img
-          src={cssSvfg}
-          alt="CSS3"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "Tailwind",
-      icon: (
-        <img
-          src={tailwindSvg}
-          alt="Tailwind CSS"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "Git",
-      icon: (
-        <img
-          src={gitSvg}
-          alt="Git & GitHub"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "REST APIs",
-      icon: (
-        <img
-          src={restSvg}
-          alt="REST APIs"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "SQL",
-      icon: (
-        <img
-          src={sqlSvg}
-          alt="SQL/MySQL"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "PHP",
-      icon: (
-        <img src={phpSvg} alt="PHP" className="w-full h-full object-contain" />
-      ),
-    },
-    {
-      name: "Figma",
-      icon: (
-        <img
-          src={figmaSvg}
-          alt="Figma"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "AI/ML",
-      icon: (
-        <img src={aiSvg} alt="AI/ML" className="w-full h-full object-contain" />
-      ),
-    },
-    {
-      name: "n8n",
-      icon: (
-        <img src={n8nSvg} alt="n8n" className="w-full h-full object-contain" />
-      ),
-    },
-    {
-      name: "RAG",
-      icon: (
-        <img src={aiSvg} alt="RAG" className="w-full h-full object-contain" />
-      ),
-    },
-    {
-      name: "Generative AI",
-      icon: (
-        <img src={aiSvg} alt="GenAI" className="w-full h-full object-contain" />
-      ),
-    },
-    {
-      name: "Deep Learning",
-      icon: (
-        <img
-          src={pythonSvg}
-          alt="Deep Learning"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
-    {
-      name: "Object Detection",
-      icon: (
-        <img
-          src={pythonSvg}
-          alt="Object Detection"
-          className="w-full h-full object-contain"
-        />
-      ),
-    },
+    { name: "React", icon: <img src={reactSvg} alt="React" className="w-full h-full object-contain" /> },
+    { name: "Node.js", icon: <img src={nodeSvg} alt="Node.js" className="w-full h-full object-contain" /> },
+    { name: "MongoDB", icon: <img src={mongoSvg} alt="MongoDB" className="w-full h-full object-contain" /> },
+    { name: "Python", icon: <img src={pythonSvg} alt="Python" className="w-full h-full object-contain" /> },
+    { name: "Tailwind", icon: <img src={tailwindSvg} alt="Tailwind" className="w-full h-full object-contain" /> },
+    { name: "Git", icon: <img src={gitSvg} alt="Git" className="w-full h-full object-contain" /> },
+    { name: "REST APIs", icon: <img src={restSvg} alt="REST APIs" className="w-full h-full object-contain" /> },
+    { name: "SQL", icon: <img src={sqlSvg} alt="SQL" className="w-full h-full object-contain" /> },
+    { name: "Figma", icon: <img src={figmaSvg} alt="Figma" className="w-full h-full object-contain" /> },
+    { name: "n8n", icon: <img src={n8nSvg} alt="n8n" className="w-full h-full object-contain" /> },
+    { name: "AI/ML", icon: <img src={aiSvg} alt="AI/ML" className="w-full h-full object-contain" /> },
+    { name: "GenAI", icon: <img src={aiSvg} alt="GenAI" className="w-full h-full object-contain" /> },
   ];
 
   return (
-    <div className="bg-black text-white min-h-screen pt-20">
-      <main className="max-w-7xl mx-auto px-4 py-16 sm:py-24 text-center">
-        <section className="flex flex-col items-center mb-24 relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 blur-[120px] rounded-full pointer-events-none"></div>
+    <div className="bg-black text-white min-h-screen pt-20 relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-purple-600/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-cyan-600/10 blur-[100px] rounded-full pointer-events-none" />
 
-          <img
-            src={logo}
-            alt="JinggStack Logo"
-            className="w-28 h-28 mb-8 relative z-10 animate-float"
-          />
-          <h1
-            className="text-5xl sm:text-7xl font-black mb-6 relative z-10"
-            style={{
-              color: "rgba(178, 102, 255, 0.9)",
-              textShadow: "0 0 30px rgba(102, 0, 153, 0.6)",
-            }}
+      <main className="max-w-7xl mx-auto px-4 py-12 sm:py-20 relative z-10">
+        {/* Hero Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col items-center mb-20 sm:mb-32 text-center"
+        >
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="relative mb-8"
           >
-            JinggStack{" "}
-            <span className="text-white block sm:inline text-3xl sm:text-5xl font-light mt-2 sm:mt-0">
-              Freelance Services
-            </span>
+            <div className="absolute inset-0 bg-purple-600 blur-2xl opacity-40 rounded-full scale-150" />
+            <img
+              src={logo}
+              alt="JinggStack Logo"
+              className="relative w-24 h-24 sm:w-32 sm:h-32"
+            />
+          </motion.div>
+
+          <h1 className="section-title text-gradient mb-4">
+            JinggStack
           </h1>
-          <p className="mt-6 text-xl text-gray-300 max-w-2xl leading-relaxed relative z-10 font-light">
-            Crafting tailored digital solutions with precision and passion.{" "}
-            <br />
-            <span className="text-purple-400 font-medium">
-              Web Development
-            </span>{" "}
-            • <span className="text-purple-400 font-medium">Automation</span> •{" "}
-            <span className="text-purple-400 font-medium">Design</span>
+          <p className="text-xl sm:text-2xl text-gray-300 font-light mb-2">
+            Freelance AI/ML Engineer & Full-Stack Developer
           </p>
-        </section>
+          <p className="max-w-2xl text-gray-400 text-base sm:text-lg leading-relaxed mb-8">
+            Crafting intelligent digital solutions with precision. Specializing in{" "}
+            <span className="text-purple-400 font-medium">AI-powered applications</span>,{" "}
+            <span className="text-cyan-400 font-medium">workflow automation</span>, and{" "}
+            <span className="text-pink-400 font-medium">modern web development</span>.
+          </p>
 
-        <section className="mb-24 relative z-10">
-          <h2 className="text-3xl font-bold text-white mb-2">
-            Technology Stack
-          </h2>
-          <div className="w-20 h-1 bg-purple-600 mx-auto rounded-full mb-12"></div>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button to="/projects" variant="primary" className="text-base px-8 py-3">
+              View My Work
+            </Button>
+            <Button to="/contact" variant="outline" className="text-base px-8 py-3">
+              Get in Touch
+            </Button>
+          </div>
+        </motion.section>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 justify-items-center">
+        {/* Stats Section */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-20 sm:mb-32"
+        >
+          <StatCard value="15+" label="Projects" />
+          <StatCard value="2+" label="Years Exp" />
+          <StatCard value="10+" label="AI Models" />
+          <StatCard value="100%" label="Dedication" />
+        </motion.section>
+
+        {/* Tech Stack Section */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mb-20 sm:mb-32"
+        >
+          <div className="text-center mb-12">
+            <motion.h2 variants={itemVariants} className="text-2xl sm:text-3xl font-bold text-white mb-3">
+              Technology Stack
+            </motion.h2>
+            <motion.div variants={itemVariants} className="w-20 h-1 bg-gradient-to-r from-purple-600 to-cyan-500 mx-auto rounded-full" />
+          </div>
+
+          <motion.div
+            variants={containerVariants}
+            className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 sm:gap-8 justify-items-center"
+          >
             {skills.map((skill) => (
               <TechIcon key={skill.name} name={skill.name}>
                 {skill.icon}
               </TechIcon>
             ))}
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
-        <section className="relative z-10">
-          <Button
-            to="/services"
-            variant="primary"
-            className="text-lg px-8 py-4"
-          >
-            Explore My Services
+        {/* CTA Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center glass rounded-3xl p-8 sm:p-12 relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/20 blur-[80px] rounded-full pointer-events-none" />
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 relative z-10">
+            Ready to Build Something Great?
+          </h2>
+          <p className="text-gray-400 max-w-xl mx-auto mb-8 relative z-10">
+            Whether you need an AI solution, a modern web app, or workflow automation,
+            I'm here to help turn your vision into reality.
+          </p>
+          <Button to="/services" variant="primary" className="text-lg px-10 py-4 relative z-10">
+            Explore Services
           </Button>
-        </section>
+        </motion.section>
       </main>
     </div>
   );

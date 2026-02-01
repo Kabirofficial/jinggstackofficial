@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 import netfliximg from "../assets/webimg/netflix.jpeg";
@@ -17,67 +18,107 @@ import snfilmzImg from "../assets/webimg/snfilmz.png";
 import n8nautomationImg from "../assets/webimg/n8n.png";
 import jinggstackImg from "../assets/webimg/RAG.png";
 
-const ProjectCard = ({ project }) => {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
+
+const ProjectCard = ({ project, index }) => {
+  const isAI = project.technologies.some(t =>
+    ['Python', 'LLMs', 'AI', 'ML', 'YOLOv8', 'RAG', 'LangChain', 'FAISS', 'LangGraph'].some(ai => t.includes(ai))
+  );
+
   return (
-    <div className="relative group w-80 h-[420px] rounded-3xl overflow-hidden shadow-xl hover:shadow-[0_0_40px_rgba(168,85,247,0.4)] transition-all duration-500 transform hover:-translate-y-2">
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-        style={{ backgroundImage: `url(${project.imageUrl})` }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-[#111827]/80 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-95" />
+    <motion.div
+      variants={itemVariants}
+      whileHover={{ y: -8 }}
+      className="relative group w-full max-w-sm"
+    >
+      {/* Card */}
+      <div className="relative h-[420px] rounded-2xl overflow-hidden glass hover:border-purple-500/50 transition-all duration-500">
+        {/* Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+          style={{ backgroundImage: `url(${project.imageUrl})` }}
+        />
 
-      <div className="absolute inset-0 p-6 flex flex-col justify-end">
-        <div className="absolute top-4 right-4 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100">
-          <span className="bg-purple-600/90 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">
-            Featured
-          </span>
-        </div>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-90 group-hover:opacity-95 transition-opacity duration-300" />
 
-        <h3 className="text-2xl font-bold text-white mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          {project.title}
-        </h3>
-
-        <p className="text-gray-300 text-sm mb-4 line-clamp-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
-          {project.description}
-        </p>
-
-        <div className="flex flex-wrap gap-2 mb-6 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-          {project.technologies.slice(0, 3).map((tech) => (
-            <span
-              key={tech}
-              className="text-[10px] font-bold uppercase tracking-wider text-purple-300 bg-purple-900/40 px-2 py-1 rounded border border-purple-500/30"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-4 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
-          {project.repoUrl && (
-            <a
-              href={project.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-purple-400 hover:text-purple-300 hover:scale-110 transition-all duration-300"
-              title="View Code"
-            >
-              <FaGithub size={18} />
-            </a>
+        {/* Content */}
+        <div className="absolute inset-0 p-6 flex flex-col justify-end">
+          {/* Badge */}
+          {isAI && (
+            <div className="absolute top-4 right-4 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100">
+              <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg">
+                AI Project
+              </span>
+            </div>
           )}
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-600/80 hover:bg-purple-600 text-white shadow-lg hover:shadow-purple-500/50 hover:scale-110 transition-all duration-300"
-              title="Live Demo"
-            >
-              <FaExternalLinkAlt size={16} />
-            </a>
-          )}
+
+          {/* Title */}
+          <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+            {project.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-gray-300 text-sm mb-4 line-clamp-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
+            {project.description}
+          </p>
+
+          {/* Tech Tags */}
+          <div className="flex flex-wrap gap-2 mb-6 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+            {project.technologies.slice(0, 4).map((tech) => (
+              <span
+                key={tech}
+                className="tag text-[9px]"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {/* Links */}
+          <div className="flex items-center gap-3 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+            {project.repoUrl && (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-10 h-10 rounded-xl glass hover:bg-white/20 text-white hover:text-purple-300 hover:scale-110 transition-all duration-300"
+                title="View Code"
+              >
+                <FaGithub size={18} />
+              </a>
+            )}
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-500 text-white shadow-lg hover:shadow-purple-500/50 hover:scale-110 transition-all duration-300"
+                title="Live Demo"
+              >
+                <FaExternalLinkAlt size={14} />
+              </a>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -85,178 +126,134 @@ const ProjectsPage = () => {
   const projectsData = [
     {
       id: 1,
-      title: "Futuristic Portfolio",
-      description:
-        "A cyberpunk-themed portfolio website with 3D elements, animations, and responsive design.",
-      technologies: ["Three.js", "SCSS", "JS"],
-      imageUrl: futuristicportfolioimg,
-      repoUrl: "https://github.com/Kabirofficial/kabir-futuristic-portfolio",
-      liveUrl: "https://kabirofficial.github.io/kabir-futuristic-portfolio/",
+      title: "JinggStack AI Bot",
+      description: "A personal AI assistant built with agent-based architecture that understands projects, codebases, and resumes to provide contextual help and code insights.",
+      technologies: ["Python", "LangGraph", "LLMs", "Vector DB"],
+      imageUrl: jinggstackImg,
+      repoUrl: "https://github.com/Kabirofficial/jinggstack-RAG",
     },
     {
       id: 2,
-      title: "Netflix Clone",
-      description:
-        "A frontend clone of Netflix with a responsive layout, styled cards, and hover interactions.",
-      technologies: ["HTML", "CSS"],
-      imageUrl: netfliximg,
-      repoUrl: "https://github.com/Kabirofficial/Netflix-clone",
+      title: "CivicLens",
+      description: "AI-powered civic issue detection using YOLOv8, GPS tagging, and smart duplicate filtering for potholes and garbage detection.",
+      technologies: ["Python", "YOLOv8", "FastAPI", "React"],
+      imageUrl: civiclensImg,
+      repoUrl: "https://github.com/Kabirofficial/CivicLens",
     },
     {
       id: 3,
-      title: "Nike Brand Page",
-      description:
-        "A product-based brand landing page inspired by Nike, featuring scroll effects and clean animations.",
-      technologies: ["React", "Tailwind CSS"],
-      imageUrl: nikebrandpageimg,
-      repoUrl: "https://github.com/Kabirofficial/nike-brand-page",
+      title: "RAG Resume Screener",
+      description: "Intelligent resume screening using RAG to match resumes with job descriptions and rank candidates with explainable AI.",
+      technologies: ["Python", "LangChain", "FAISS", "FastAPI"],
+      imageUrl: resumescreenerImg,
+      repoUrl: "https://github.com/Kabirofficial/AI-Resume-Screening",
     },
     {
       id: 4,
-      title: "Riot Clone",
-      description:
-        "Riot Games-inspired UI clone using HTML, CSS, and JavaScript to replicate the website layout.",
-      technologies: ["HTML", "CSS", "JavaScript"],
-      imageUrl: riotimg,
-      repoUrl: "https://github.com/Kabirofficial/riot-clone",
+      title: "n8n AI Automation",
+      description: "AI-powered automation workflows including email auto-responder, summarizer, and HR hiring assistant.",
+      technologies: ["n8n", "LLMs", "Gmail API", "Meta API"],
+      imageUrl: n8nautomationImg,
     },
     {
       id: 5,
-      title: "Dice Game",
-      description:
-        "A simple dice rolling game built in React to explore useState and game logic handling.",
-      technologies: ["React", "CSS"],
-      imageUrl: dicegameimg,
-      repoUrl: "https://github.com/Kabirofficial/DiceGame",
+      title: "JinggDesk",
+      description: "Full-stack task management with admin/user roles, JWT auth, dashboards, and exportable reports.",
+      technologies: ["MERN", "Tailwind", "JWT", "MongoDB"],
+      imageUrl: jinggdeskImg,
     },
     {
       id: 6,
-      title: "JS Mini Projects",
-      description:
-        "A series of small projects like a weather app, QR generator, calculator, and more.",
-      technologies: ["HTML", "CSS", "JavaScript"],
-      imageUrl: jsprojectsimg,
-      repoUrl: "https://github.com/Kabirofficial/JavaScript-Small-Projects",
+      title: "SnFilmz Portfolio",
+      description: "Professional filmmaker portfolio showcasing reels, private shoots, and booking system.",
+      technologies: ["React", "Tailwind", "Vercel"],
+      imageUrl: snfilmzImg,
+      liveUrl: "https://snfilmz.vercel.app/",
     },
     {
       id: 7,
-      title: "Spotify Clone",
-      description:
-        "A frontend Spotify UI clone featuring stylish song cards, animated controls, and responsive layout.",
-      technologies: ["HTML", "CSS", "JS"],
-      imageUrl: spotifyimg,
-      repoUrl: "https://github.com/Kabirofficial/spotify-clone",
-    },
-    {
-      id: 8,
-      title: "Prime Video Clone",
-      description:
-        "A responsive frontend Amazon Prime Video homepage clone with custom layout and hover effects.",
-      technologies: ["HTML", "CSS", "JS"],
-      imageUrl: primevideoimg,
-      repoUrl: "https://github.com/Kabirofficial/Prime-Video-Frontend-Clone-",
-    },
-    {
-      id: 9,
       title: "YumYard Recipe App",
-      description:
-        "A modern recipe app built with React. Features include adding, viewing, and favoriting recipes.",
+      description: "Modern recipe app with adding, viewing, and favoriting recipes functionality.",
       technologies: ["MERN", "Tailwind"],
       imageUrl: yumyardImg,
       repoUrl: "https://github.com/your-username/YumYard",
     },
     {
-      id: 10,
-      title: "CivicLens",
-      description:
-        "An AI-powered civic issue detection and reporting platform that identifies problems like potholes and garbage using computer vision, GPS tagging, and smart duplicate filtering.",
-      technologies: [
-        "Python",
-        "FastAPI",
-        "YOLOv8",
-        "MongoDB",
-        "React",
-        "Tailwind",
-      ],
-      imageUrl: civiclensImg,
-      repoUrl: "https://github.com/Kabirofficial/CivicLens",
+      id: 8,
+      title: "Futuristic Portfolio",
+      description: "Cyberpunk-themed portfolio with 3D elements, Three.js animations, and responsive design.",
+      technologies: ["Three.js", "SCSS", "JavaScript"],
+      imageUrl: futuristicportfolioimg,
+      repoUrl: "https://github.com/Kabirofficial/kabir-futuristic-portfolio",
+      liveUrl: "https://kabirofficial.github.io/kabir-futuristic-portfolio/",
     },
-
     {
-      id: 11,
-      title: "RAG-Based Resume Screener",
-      description:
-        "An intelligent resume screening system using Retrieval-Augmented Generation (RAG) to match resumes with job descriptions and rank candidates with explainable AI reasoning.",
-      technologies: ["Python", "FastAPI", "LLMs", "FAISS", "LangChain"],
-      imageUrl: resumescreenerImg,
-      repoUrl: "https://github.com/Kabirofficial/AI-Resume-Screening",
-    },
-
-    {
-      id: 12,
-      title: "JinggStack AI Bot",
-      description:
-        "A personal AI assistant built with agent-based architecture that understands projects, codebases, and resumes to provide contextual help, planning, and code insights.",
-      technologies: ["Python", "LangGraph", "LLMs", "Vector DB", "APIs"],
-      imageUrl: jinggstackImg,
-      repoUrl: "https://github.com/Kabirofficial/jinggstack-RAG",
-    },
-
-    {
-      id: 13,
-      title: "n8n AI Automation Suite",
-      description:
-        "A collection of AI-powered automation workflows including email auto-responder, email summarizer, AI HR hiring assistant, and Meta lead extractor with scheduled reports.",
-      technologies: ["n8n", "LLMs", "APIs", "Gmail API", "Meta Ads API"],
-      imageUrl: n8nautomationImg,
-    },
-
-    {
-      id: 14,
-      title: "SnFilmz Portfolio Website",
-      description:
-        "A professional portfolio website built for a filmmaker to showcase paid reels, private shoot projects, and provide easy contact and booking access.",
-      technologies: ["React", "Tailwind CSS", "Responsive Design"],
-      imageUrl: snfilmzImg,
-      liveUrl: "https://snfilmz.vercel.app/",
-    },
-
-    {
-      id: 15,
-      title: "JinggDesk",
-      description:
-        "A full-stack task management web application with admin and user roles, JWT authentication, task workflows, dashboards, and exportable reports.",
-      technologies: ["MERN", "Tailwind CSS", "JWT", "MongoDB"],
-      imageUrl: jinggdeskImg,
+      id: 9,
+      title: "Netflix Clone",
+      description: "Frontend clone with responsive layout, styled cards, and hover interactions.",
+      technologies: ["HTML", "CSS"],
+      imageUrl: netfliximg,
+      repoUrl: "https://github.com/Kabirofficial/Netflix-clone",
     },
   ];
 
   return (
-    <div className="bg-black text-white min-h-screen px-4 py-16 sm:px-6 lg:px-8 pt-32">
-      <main className="max-w-7xl mx-auto">
-        <section className="text-center mb-20 relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-900/10 blur-[100px] rounded-full pointing-events-none"></div>
+    <div className="bg-black text-white min-h-screen pt-24 pb-20 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
+      <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-purple-600/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-600/10 blur-[120px] rounded-full pointer-events-none" />
 
-          <h1
-            className="text-4xl sm:text-6xl font-black mb-6 relative z-10"
-            style={{
-              color: "rgba(178, 102, 255, 0.9)",
-              textShadow: "0 0 20px rgba(102, 0, 153, 0.7)",
-            }}
-          >
-            My Projects
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="tag mb-4 inline-block">Portfolio</span>
+          <h1 className="section-title text-gradient mb-4">
+            Featured Projects
           </h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-400 relative z-10">
-            A selection of my work. Each project is a journey in design and
-            development.
+          <p className="max-w-2xl mx-auto text-gray-400 text-lg">
+            A curated collection of AI/ML solutions, automation workflows, and full-stack applications.
+            Each project represents a journey in innovation and engineering excellence.
           </p>
-        </section>
+        </motion.section>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-y-16 gap-x-8 justify-items-center pb-20">
-          {projectsData.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+        {/* Projects Grid */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center"
+        >
+          {projectsData.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
-        </section>
+        </motion.section>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <p className="text-gray-400 mb-6">
+            Interested in collaborating on something amazing?
+          </p>
+          <a
+            href="https://github.com/Kabirofficial"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-premium inline-flex items-center gap-2"
+          >
+            <FaGithub size={18} />
+            View All on GitHub
+          </a>
+        </motion.div>
       </main>
     </div>
   );

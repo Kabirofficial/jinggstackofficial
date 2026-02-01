@@ -2,15 +2,15 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Hyperspeed from "../components/HyperSpeed";
-import Button from "../components/Button";
+import Button from "../components/ui/Button";
 
 const LandingPage = () => {
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-black">
       <Hyperspeed
         effectOptions={{
-          onSpeedUp: () => {},
-          onSlowDown: () => {},
+          onSpeedUp: () => { },
+          onSlowDown: () => { },
           distortion: "turbulentDistortion",
           length: 400,
           roadWidth: 10,
