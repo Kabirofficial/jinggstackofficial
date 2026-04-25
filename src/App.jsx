@@ -15,10 +15,10 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 // Loading fallback component
 const PageLoader = () => (
-  <div className="min-h-screen bg-black flex items-center justify-center">
+  <div className="min-h-screen bg-[#36064D] flex items-center justify-center">
     <div className="relative">
-      <div className="w-16 h-16 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin"></div>
-      <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-purple-400 rounded-full animate-spin animate-reverse" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+      <div className="w-16 h-16 border-4 border-[#DA4848]/30 border-t-[#DA4848] rounded-full animate-spin"></div>
+      <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-[#DA4848]/60 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
     </div>
   </div>
 );

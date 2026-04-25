@@ -1,14 +1,7 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 import netfliximg from "../assets/webimg/netflix.jpeg";
-import nikebrandpageimg from "../assets/webimg/nikebrandpage.jpeg";
-import riotimg from "../assets/webimg/riot.jpeg";
-import dicegameimg from "../assets/webimg/dicegame.jpeg";
-import spotifyimg from "../assets/webimg/spotify.jpeg";
-import primevideoimg from "../assets/webimg/primevideo.jpeg";
-import jsprojectsimg from "../assets/webimg/jsminiproject.png";
 import futuristicportfolioimg from "../assets/webimg/futuristicportfolio.png";
 import yumyardImg from "../assets/webimg/YumYard.png";
 import civiclensImg from "../assets/webimg/civiclens.png";
@@ -18,107 +11,75 @@ import snfilmzImg from "../assets/webimg/snfilmz.png";
 import n8nautomationImg from "../assets/webimg/n8n.png";
 import jinggstackImg from "../assets/webimg/RAG.png";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
-
 const ProjectCard = ({ project, index }) => {
   const isAI = project.technologies.some(t =>
     ['Python', 'LLMs', 'AI', 'ML', 'YOLOv8', 'RAG', 'LangChain', 'FAISS', 'LangGraph'].some(ai => t.includes(ai))
   );
 
   return (
-    <motion.div
-      variants={itemVariants}
-      whileHover={{ y: -8 }}
-      className="relative group w-full max-w-sm"
-    >
-      {/* Card */}
-      <div className="relative h-[420px] rounded-2xl overflow-hidden glass hover:border-purple-500/50 transition-all duration-500">
-        {/* Image */}
+    <div className="relative group w-full bg-[#FFFFFF]/5 border border-[#FFFFFF]/10 overflow-hidden hover:border-[#DA4848] transition-colors duration-500">
+      {/* Image Container */}
+      <div className="relative h-64 md:h-80 w-full overflow-hidden border-b border-[#FFFFFF]/10">
         <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
           style={{ backgroundImage: `url(${project.imageUrl})` }}
         />
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-90 group-hover:opacity-95 transition-opacity duration-300" />
-
-        {/* Content */}
-        <div className="absolute inset-0 p-6 flex flex-col justify-end">
-          {/* Badge */}
-          {isAI && (
-            <div className="absolute top-4 right-4 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100">
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg">
-                AI Project
-              </span>
-            </div>
-          )}
-
-          {/* Title */}
-          <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-            {project.title}
-          </h3>
-
-          {/* Description */}
-          <p className="text-gray-300 text-sm mb-4 line-clamp-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
-            {project.description}
-          </p>
-
-          {/* Tech Tags */}
-          <div className="flex flex-wrap gap-2 mb-6 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-            {project.technologies.slice(0, 4).map((tech) => (
-              <span
-                key={tech}
-                className="tag text-[9px]"
-              >
-                {tech}
-              </span>
-            ))}
+        <div className="absolute inset-0 bg-[#36064D]/30 mix-blend-multiply group-hover:bg-transparent transition-colors duration-500"></div>
+        
+        {isAI && (
+          <div className="absolute top-4 left-4">
+            <span className="bg-[#DA4848] text-[#FFFFFF] text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
+              AI Core
+            </span>
           </div>
-
-          {/* Links */}
-          <div className="flex items-center gap-3 transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
-            {project.repoUrl && (
-              <a
-                href={project.repoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl glass hover:bg-white/20 text-white hover:text-purple-300 hover:scale-110 transition-all duration-300"
-                title="View Code"
-              >
-                <FaGithub size={18} />
-              </a>
-            )}
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-xl bg-purple-600 hover:bg-purple-500 text-white shadow-lg hover:shadow-purple-500/50 hover:scale-110 transition-all duration-300"
-                title="Live Demo"
-              >
-                <FaExternalLinkAlt size={14} />
-              </a>
-            )}
-          </div>
+        )}
+        <div className="absolute bottom-4 right-4 text-[#FFFFFF]/50 font-mono text-xs z-20 uppercase tracking-widest font-bold">
+          PRJ_0{index + 1}
         </div>
       </div>
-    </motion.div>
+
+      {/* Content Container */}
+      <div className="p-8">
+        <h3 className="text-2xl font-black text-[#FFFFFF] uppercase tracking-tighter mb-4 group-hover:text-[#DA4848] transition-colors duration-300">
+          {project.title}
+        </h3>
+        <p className="text-[#FFFFFF]/70 text-sm font-light leading-relaxed mb-8 h-20 overflow-hidden">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-2 mb-8">
+          {project.technologies.slice(0, 4).map((tech) => (
+            <span key={tech} className="border border-[#FFFFFF]/20 text-[#FFFFFF]/50 text-[10px] font-bold uppercase tracking-wider px-2 py-1">
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Links */}
+        <div className="flex items-center gap-4 pt-6 border-t border-[#FFFFFF]/10">
+          {project.repoUrl && (
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[#FFFFFF]/70 hover:text-[#DA4848] text-xs font-bold uppercase tracking-widest transition-colors"
+            >
+              <FaGithub size={16} /> Code
+            </a>
+          )}
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[#FFFFFF]/70 hover:text-[#DA4848] text-xs font-bold uppercase tracking-widest transition-colors"
+            >
+              <FaExternalLinkAlt size={14} /> Live Demo
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -198,62 +159,45 @@ const ProjectsPage = () => {
   ];
 
   return (
-    <div className="bg-black text-white min-h-screen pt-24 pb-20 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
-      <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-purple-600/10 blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-600/10 blur-[120px] rounded-full pointer-events-none" />
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="bg-[#36064D] text-[#FFFFFF] min-h-screen pt-32 pb-20 selection:bg-[#DA4848] selection:text-[#FFFFFF] overflow-x-hidden font-sans">
+      <main className="max-w-[1600px] mx-auto px-6 md:px-12">
+        
         {/* Header */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="tag mb-4 inline-block">Portfolio</span>
-          <h1 className="section-title text-gradient mb-4">
-            Featured Projects
-          </h1>
-          <p className="max-w-2xl mx-auto text-gray-400 text-lg">
-            A curated collection of AI/ML solutions, automation workflows, and full-stack applications.
-            Each project represents a journey in innovation and engineering excellence.
-          </p>
-        </motion.section>
+        <section className="border-b border-[#FFFFFF]/10 pb-12 mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+             <p className="text-[#DA4848] uppercase tracking-[0.3em] text-sm font-bold mb-4">Operations Log</p>
+             <h1 className="text-5xl md:text-8xl uppercase font-black tracking-tighter text-[#FFFFFF] leading-[0.9]">
+               Completed <br /> Missions
+             </h1>
+          </div>
+          <div className="hidden md:block w-2 h-24 bg-[#DA4848]"></div>
+        </section>
 
         {/* Projects Grid */}
-        <motion.section
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center"
-        >
+        <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-32">
           {projectsData.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
-        </motion.section>
+        </section>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
-          <p className="text-gray-400 mb-6">
-            Interested in collaborating on something amazing?
+        <section className="bg-[#FFFFFF]/5 border border-[#FFFFFF]/10 p-12 md:p-24 text-center">
+          <h2 className="text-3xl md:text-5xl uppercase font-black tracking-tighter text-[#FFFFFF] mb-6">
+            Access Full Database
+          </h2>
+          <p className="text-[#FFFFFF]/70 font-light max-w-xl mx-auto mb-10 text-lg">
+            Review the complete archive of source code, experiments, and open-source contributions.
           </p>
           <a
             href="https://github.com/Kabirofficial"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-premium inline-flex items-center gap-2"
+            className="inline-flex items-center justify-center gap-3 px-10 py-4 border border-[#FFFFFF] text-[#FFFFFF] font-bold uppercase tracking-widest text-sm hover:bg-[#FFFFFF] hover:text-[#36064D] transition-all duration-300"
           >
             <FaGithub size={18} />
-            View All on GitHub
+            GitHub Repository
           </a>
-        </motion.div>
+        </section>
       </main>
     </div>
   );

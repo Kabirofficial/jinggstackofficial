@@ -1,142 +1,98 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { FaEnvelope, FaLinkedin, FaGithub, FaKaggle } from "react-icons/fa";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
 
 const ContactPage = () => {
   const contactMethods = [
     {
-      icon: <FaEnvelope size={28} />,
+      icon: <FaEnvelope size={24} />,
       title: "Email",
       value: "jinggstack@gmail.com",
       href: "mailto:jinggstack@gmail.com",
-      color: "hover:border-purple-500/50",
-      iconColor: "group-hover:text-purple-400",
-      description: "Best for project inquiries",
+      description: "Direct Comms",
     },
     {
-      icon: <FaLinkedin size={28} />,
+      icon: <FaLinkedin size={24} />,
       title: "LinkedIn",
       value: "Thayani Kabir",
       href: "https://www.linkedin.com/in/thayanikabir/",
-      color: "hover:border-blue-500/50",
-      iconColor: "group-hover:text-blue-400",
-      description: "Let's connect professionally",
+      description: "Professional Network",
     },
     {
-      icon: <FaGithub size={28} />,
+      icon: <FaGithub size={24} />,
       title: "GitHub",
       value: "@Kabirofficial",
       href: "https://github.com/Kabirofficial",
-      color: "hover:border-white/50",
-      iconColor: "group-hover:text-white",
-      description: "Check out my projects",
+      description: "Source Code",
     },
     {
-      icon: <FaKaggle size={28} />,
+      icon: <FaKaggle size={24} />,
       title: "Kaggle",
       value: "@jinggxd",
       href: "https://www.kaggle.com/jinggxd",
-      color: "hover:border-cyan-500/50",
-      iconColor: "group-hover:text-cyan-400",
-      description: "AI/ML notebooks & competitions",
+      description: "AI Models & Data",
     },
   ];
 
   return (
-    <div className="bg-black text-white min-h-screen pt-24 pb-20 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
-      <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-purple-600/10 blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-600/10 blur-[120px] rounded-full pointer-events-none" />
-
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="bg-[#36064D] text-[#FFFFFF] min-h-screen pt-32 pb-20 selection:bg-[#DA4848] selection:text-[#FFFFFF] overflow-x-hidden font-sans">
+      <main className="max-w-[1600px] mx-auto px-6 md:px-12">
+        
         {/* Header */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="tag mb-4 inline-block">Contact</span>
-          <h1 className="section-title text-gradient mb-4">
-            Let's Work Together
-          </h1>
-          <p className="max-w-2xl mx-auto text-gray-400 text-lg">
-            Ready to build something amazing? Reach out through any of these channels.
-          </p>
-        </motion.section>
+        <section className="border-b border-[#FFFFFF]/10 pb-12 mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+             <p className="text-[#DA4848] uppercase tracking-[0.3em] text-sm font-bold mb-4">Transmission</p>
+             <h1 className="text-5xl md:text-8xl uppercase font-black tracking-tighter text-[#FFFFFF] leading-[0.9]">
+               Establish <br /> Contact
+             </h1>
+          </div>
+          <div className="hidden md:block w-2 h-24 bg-[#DA4848]"></div>
+        </section>
 
         {/* Contact Cards */}
-        <motion.section
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16"
-        >
-          {contactMethods.map((method) => (
-            <motion.a
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#FFFFFF]/10 border border-[#FFFFFF]/10 mb-32">
+          {contactMethods.map((method, index) => (
+            <a
               key={method.title}
-              variants={itemVariants}
-              whileHover={{ y: -4, scale: 1.02 }}
               href={method.href}
               target={method.href.startsWith("http") ? "_blank" : undefined}
               rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className={`block glass rounded-2xl p-8 transition-all duration-300 group ${method.color}`}
+              className="bg-[#36064D] p-10 md:p-16 hover:bg-[#FFFFFF]/5 transition-colors duration-300 relative group flex flex-col md:flex-row items-start md:items-center gap-8"
             >
-              <div className="flex items-start gap-5">
-                <div className={`text-gray-400 transition-all duration-300 ${method.iconColor} group-hover:scale-110`}>
-                  {method.icon}
-                </div>
-                <div className="flex-1">
-                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">{method.title}</p>
-                  <p className="text-white font-semibold text-lg mb-1">{method.value}</p>
-                  <p className="text-gray-500 text-sm">{method.description}</p>
-                </div>
+              <div className="absolute top-8 right-8 text-[#FFFFFF]/20 font-mono text-xs font-bold uppercase tracking-widest group-hover:text-[#DA4848] transition-colors">
+                CH_0{index + 1}
               </div>
-            </motion.a>
+              <div className="w-16 h-16 flex items-center justify-center border border-[#FFFFFF]/20 text-[#FFFFFF]/50 group-hover:border-[#DA4848] group-hover:text-[#DA4848] group-hover:bg-[#DA4848]/10 transition-all duration-300 shrink-0">
+                {method.icon}
+              </div>
+              <div className="flex-1">
+                <p className="text-[#DA4848] text-xs uppercase tracking-widest font-bold mb-2">{method.title}</p>
+                <p className="text-2xl font-black text-[#FFFFFF] mb-2">{method.value}</p>
+                <p className="text-[#FFFFFF]/50 font-light text-sm">{method.description}</p>
+              </div>
+            </a>
           ))}
-        </motion.section>
+        </section>
 
         {/* Response Info */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center glass rounded-3xl p-8 sm:p-12"
-        >
-          <h2 className="text-2xl font-bold text-white mb-4">
-            Quick Response Guaranteed
-          </h2>
-          <p className="text-gray-400 max-w-xl mx-auto mb-6">
-            I typically respond within <span className="text-purple-400 font-medium">24 hours</span>.
-            For urgent inquiries, please mention it in your message.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500">
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              Available for freelance
-            </span>
-            <span>Based in India (IST)</span>
+        <section className="bg-[#FFFFFF]/5 border border-[#FFFFFF]/10 p-12 md:p-24 text-center relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)", backgroundSize: "40px 40px" }}></div>
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-5xl uppercase font-black tracking-tighter text-[#FFFFFF] mb-6">
+              System Status: Active
+            </h2>
+            <p className="text-[#FFFFFF]/70 font-light max-w-xl mx-auto mb-10 text-lg">
+              Comms are monitored continuously. Expect a response within <strong className="text-[#FFFFFF] font-bold">24 hours</strong>. For urgent mission-critical inquiries, specify in your transmission.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-[#FFFFFF]/50 uppercase tracking-widest font-bold">
+              <span className="flex items-center gap-3">
+                <span className="w-2 h-2 bg-[#DA4848] animate-pulse"></span>
+                Available for Deployment
+              </span>
+              <span>Location: IST Sector</span>
+            </div>
           </div>
-        </motion.section>
+        </section>
+
       </main>
     </div>
   );

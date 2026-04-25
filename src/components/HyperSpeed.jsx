@@ -29,14 +29,14 @@ const Hyperspeed = ({ effectOptions = {
   carShiftX: [-0.8, 0.8],
   carFloorSeparation: [0, 5],
   colors: {
-    roadColor: 0x080808,
-    islandColor: 0x0a0a0a,
-    background: 0x000000,
+    roadColor: 0x36064D,
+    islandColor: 0x36064D,
+    background: 0x36064D,
     shoulderLines: 0xFFFFFF,
     brokenLines: 0xFFFFFF,
-    leftCars: [0xD856BF, 0x6750A2, 0xC247AC],
-    rightCars: [0x03B3C3, 0x0E5EA5, 0x324555],
-    sticks: 0x03B3C3,
+    leftCars: [0xDA4848, 0xFFFFFF, 0xDA4848],
+    rightCars: [0xFFFFFF, 0xDA4848, 0xFFFFFF],
+    sticks: 0xDA4848,
   }
 } }) => {
   const hyperspeed = useRef(null);

@@ -1,91 +1,119 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
-import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Hyperspeed from "../components/HyperSpeed";
-import Button from "../components/ui/Button";
+import sysImg01 from "../assets/sys_img_01.png";
+import sysImg02 from "../assets/sys_img_02.png";
 
-const LandingPage = () => {
+const VastLandingPage = () => {
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-black">
-      <Hyperspeed
-        effectOptions={{
-          onSpeedUp: () => { },
-          onSlowDown: () => { },
-          distortion: "turbulentDistortion",
-          length: 400,
-          roadWidth: 10,
-          islandWidth: 2,
-          lanesPerRoad: 4,
-          fov: 90,
-          fovSpeedUp: 150,
-          speedUp: 2,
-          carLightsFade: 0.4,
-          totalSideLightSticks: 20,
-          lightPairsPerRoadWay: 40,
-          shoulderLinesWidthPercentage: 0.05,
-          brokenLinesWidthPercentage: 0.1,
-          brokenLinesLengthPercentage: 0.5,
-          lightStickWidth: [0.12, 0.5],
-          lightStickHeight: [1.3, 1.7],
-          movingAwaySpeed: [60, 80],
-          movingCloserSpeed: [-120, -160],
-          carLightsLength: [400 * 0.03, 400 * 0.2],
-          carLightsRadius: [0.05, 0.14],
-          carWidthPercentage: [0.3, 0.5],
-          carShiftX: [-0.8, 0.8],
-          carFloorSeparation: [0, 5],
-          colors: {
-            roadColor: 0x120026,
-            islandColor: 0x2e003e,
-            background: 0x000000,
-            shoulderLines: 0x6a00ff,
-            brokenLines: 0x9b59b6,
-            leftCars: [0x9b59b6, 0x8e44ad, 0x7d3c98],
-            rightCars: [0x6a00ff, 0x5b00e6, 0x4c00cc],
-            sticks: 0x9b59b6,
-          },
-        }}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 1,
-        }}
-      />
+    <div className="bg-[#36064D] min-h-screen text-[#FFFFFF] font-sans selection:bg-[#DA4848] selection:text-[#FFFFFF] overflow-x-hidden pt-24">
+      
+      {/* 2. The Hero Section (Cinematic Full-Viewport) */}
+      <section className="relative h-screen w-full flex flex-col justify-end pb-24 md:pb-32 px-6 md:px-12 max-w-[1600px] mx-auto mt-[-6rem]">
+        {/* Cinematic Background - Hyperspeed */}
+        <div className="absolute inset-0 z-0 bg-[#36064D] overflow-hidden">
+          <Hyperspeed />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#36064D] via-[#36064D]/50 to-transparent pointer-events-none"></div>
+        </div>
 
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-[90%] flex flex-col items-center text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl md:text-7xl font-black leading-tight mb-10 px-4"
-          style={{
-            color: "rgba(178, 102, 255, 0.9)",
-            textShadow:
-              "0 0 20px rgba(178, 102, 255, 0.5), 0 0 40px rgba(102, 0, 153, 0.5)",
-          }}
-        >
-          Build scalable, secure, and efficient web applications with JinggStack
-        </motion.h1>
+        <div className="relative z-10 max-w-5xl">
+          <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-8">
+            <div className="w-16 h-1 bg-[#DA4848] shrink-0 mb-4 md:mb-8 md:hidden"></div>
+            <div className="hidden md:block w-1.5 h-32 bg-[#DA4848] shrink-0 mb-4"></div>
+            
+            <div>
+              <p className="text-[#DA4848] uppercase tracking-[0.3em] text-sm md:text-base font-bold mb-4">
+                Systems Engineering & Design
+              </p>
+              <h1 className="text-6xl md:text-9xl uppercase font-black tracking-tighter text-[#FFFFFF] leading-[0.9]">
+                Architect<br />
+                The Future.
+              </h1>
+            </div>
+          </div>
+          
+          <div className="mt-12 flex flex-col sm:flex-row gap-6">
+            <Link to="/projects" className="inline-flex items-center justify-center px-10 py-4 border border-[#FFFFFF] text-[#FFFFFF] font-bold uppercase tracking-widest text-sm hover:bg-[#DA4848] hover:border-[#DA4848] transition-all duration-300">
+              View Intel
+            </Link>
+          </div>
+        </div>
+      </section>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        >
-          <Button
-            to="/home"
-            variant="primary"
-            className="text-xl px-2 py-1 min-w-[180px]"
-          >
-            Enter Site
-          </Button>
-        </motion.div>
-      </div>
+      {/* 3. "The Mission" / Feature Sections (High Contrast Grids) */}
+      
+      {/* Section A: Mission */}
+      <section className="py-24 md:py-40 px-6 md:px-12 max-w-[1600px] mx-auto relative border-t border-[#FFFFFF]/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+          <div className="order-2 md:order-1 flex flex-col items-start">
+            <h2 className="text-4xl md:text-6xl uppercase font-black tracking-tighter text-[#FFFFFF] mb-8 leading-tight">
+              Precision in <br />
+              <span className="text-[#DA4848]">Every Stack</span>
+            </h2>
+            <p className="text-[#FFFFFF]/80 font-light text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
+              We engineer uncompromising digital infrastructure. From scalable AI agents and complex vector databases to ultra-refined front-end interfaces, our mission is to build software that defies gravity and outlasts the competition.
+            </p>
+            <Link to="/about" className="inline-flex items-center justify-center px-10 py-4 border border-[#FFFFFF] text-[#FFFFFF] font-bold uppercase tracking-widest text-sm hover:bg-[#DA4848] hover:border-[#DA4848] transition-all duration-300">
+              Read Protocol
+            </Link>
+          </div>
+          
+          <div className="order-1 md:order-2 w-full aspect-square md:aspect-[4/5] bg-[#FFFFFF]/5 border border-[#FFFFFF]/10 relative overflow-hidden group">
+             <div className="absolute inset-0 bg-[#36064D]/50 mix-blend-multiply group-hover:bg-transparent transition-all duration-700 z-10 pointer-events-none"></div>
+             <img src={sysImg01} alt="Systems Infrastructure" className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700" />
+             <div className="absolute top-6 left-6 text-[#FFFFFF]/30 font-mono text-xs z-20">SYS_IMG_01</div>
+             <div className="absolute bottom-6 right-6 w-3 h-3 bg-[#DA4848] z-20"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section B: Capabilities */}
+      <section className="py-24 md:py-40 px-6 md:px-12 bg-[#FFFFFF]/5 border-t border-[#FFFFFF]/10">
+        <div className="max-w-[1600px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+            
+            <div className="w-full aspect-[16/9] md:aspect-square bg-[#FFFFFF]/5 border border-[#FFFFFF]/10 relative overflow-hidden group">
+               <div className="absolute inset-0 bg-[#36064D]/50 mix-blend-multiply group-hover:bg-transparent transition-all duration-700 z-10 pointer-events-none"></div>
+               <img src={sysImg02} alt="Neural Architecture" className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700" />
+               <div className="absolute top-6 right-6 text-[#FFFFFF]/30 font-mono text-xs z-20">SYS_IMG_02</div>
+               <div className="absolute bottom-6 left-6 w-3 h-3 border border-[#DA4848] z-20"></div>
+               
+               {/* UI Grid lines inside placeholder for structure */}
+               <div className="absolute inset-0 pointer-events-none z-20" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)", backgroundSize: "40px 40px" }}></div>
+            </div>
+
+            <div className="flex flex-col items-start">
+              <p className="text-[#DA4848] uppercase tracking-[0.2em] text-sm font-bold mb-6">Core Capabilities</p>
+              <h2 className="text-4xl md:text-6xl uppercase font-black tracking-tighter text-[#FFFFFF] mb-8 leading-tight">
+                Architectural <br /> Superiority
+              </h2>
+              
+              <div className="space-y-8 mb-10 w-full">
+                <div className="border-b border-[#FFFFFF]/10 pb-6">
+                  <h3 className="text-xl uppercase font-bold tracking-wider text-[#FFFFFF] mb-3">AI & Machine Learning</h3>
+                  <p className="text-[#FFFFFF]/80 font-light leading-relaxed">Integration of Large Language Models, RAG architectures, and custom AI agents to automate and intelligently scale operations.</p>
+                </div>
+                <div className="border-b border-[#FFFFFF]/10 pb-6">
+                  <h3 className="text-xl uppercase font-bold tracking-wider text-[#FFFFFF] mb-3">Full-Stack Monoliths</h3>
+                  <p className="text-[#FFFFFF]/80 font-light leading-relaxed">High-performance React/Node applications backed by highly structured relational and non-relational databases.</p>
+                </div>
+                <div className="border-b border-[#FFFFFF]/10 pb-6">
+                  <h3 className="text-xl uppercase font-bold tracking-wider text-[#FFFFFF] mb-3">Workflow Automation</h3>
+                  <p className="text-[#FFFFFF]/80 font-light leading-relaxed">Connecting disparate systems using n8n and highly resilient APIs to forge unbreakable operational pipelines.</p>
+                </div>
+              </div>
+
+              <Link to="/services" className="inline-flex items-center justify-center px-10 py-4 border border-[#FFFFFF] text-[#FFFFFF] font-bold uppercase tracking-widest text-sm hover:bg-[#DA4848] hover:border-[#DA4848] transition-all duration-300">
+                Explore Tech
+              </Link>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };
 
-export default LandingPage;
+export default VastLandingPage;

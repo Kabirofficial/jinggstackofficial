@@ -1,44 +1,41 @@
 import React from "react";
-import Button from "../components/ui/Button";
+import { Link } from "react-router-dom";
 
 const NotFoundPage = () => {
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-4 text-center">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-900/20 blur-[120px] rounded-full pointing-events-none"></div>
+    <div className="bg-[#36064D] text-[#FFFFFF] min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-6 text-center font-sans">
+      
+      {/* Cinematic Background Grid */}
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)", backgroundSize: "40px 40px" }}></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#36064D] to-transparent pointer-events-none"></div>
 
-      <div className="relative z-10">
-        <h1
-          className="text-9xl font-black mb-4 tracking-tighter"
-          style={{
-            color: "transparent",
-            WebkitTextStroke: "2px rgba(168, 85, 247, 0.5)",
-            textShadow: "0 0 30px rgba(168, 85, 247, 0.2)",
-          }}
-        >
+      <div className="relative z-10 flex flex-col items-center">
+        <p className="text-[#DA4848] uppercase tracking-[0.4em] font-bold text-sm mb-4 animate-pulse">
+          Critical Error
+        </p>
+        
+        <h1 className="text-[12rem] md:text-[20rem] font-black uppercase tracking-tighter leading-none text-[#FFFFFF]/5 select-none mb-[-2rem] md:mb-[-4rem]">
           404
         </h1>
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-          Page Not Found
+        
+        <h2 className="text-3xl md:text-5xl font-black text-[#FFFFFF] uppercase tracking-tighter mb-6">
+          System Override <br /> Signal Lost
         </h2>
-        <p className="text-gray-400 max-w-lg mx-auto mb-10 text-lg">
-          The page you are looking for seems to have been lost in the digital
-          void.
+        
+        <p className="text-[#FFFFFF]/70 font-light max-w-md mx-auto mb-12 text-base md:text-lg">
+          The requested coordinate does not exist in the current database. Re-calibrate your navigation systems.
         </p>
 
-        <Button to="/home" variant="primary" className="text-lg px-8 py-3">
-          Return Home
-        </Button>
+        <Link to="/home" className="inline-flex items-center justify-center px-10 py-4 border border-[#DA4848] bg-[#DA4848] text-[#FFFFFF] font-bold uppercase tracking-widest text-sm hover:bg-transparent hover:text-[#DA4848] transition-all duration-300">
+          Abort to Home Base
+        </Link>
       </div>
 
-      <div className="absolute inset-0 pointer-events-none opacity-20">
-        <div
-          className="absolute top-20 left-20 w-32 h-32 border border-purple-500/30 rounded-full animate-pulse"
-          style={{ animationDuration: "3s" }}
-        ></div>
-        <div
-          className="absolute bottom-20 right-20 w-48 h-48 border border-blue-500/30 rounded-full animate-pulse"
-          style={{ animationDuration: "4s" }}
-        ></div>
+      <div className="absolute top-12 left-12 text-[#FFFFFF]/30 font-mono text-xs uppercase tracking-widest">
+        SYS_ERR_404
+      </div>
+      <div className="absolute bottom-12 right-12 text-[#DA4848] font-mono text-xs uppercase tracking-widest animate-pulse">
+        RE-ROUTING...
       </div>
     </div>
   );
